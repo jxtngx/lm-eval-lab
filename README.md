@@ -11,7 +11,7 @@ This library aids in the selection of SLMs based on user defined criteria and pe
 - [ ] determine models (likely Nemotron distilled, Minitron, Phi 3 mini, Llama 3.1 and 3.2)
 - [ ] locate persona dataset (e.g. [argilla/FinePersonas-v0.1](https://huggingface.co/datasets/argilla/FinePersonas-v0.1)) and determine suitability
 - [ ] check installation and usage in Colab
-- [ ] check clone and usage in HF Space
+- [ ] check clone and usage in GPU enabled instance
 - [ ] craft prompts for LM as a judge
 - [ ] find an up-to-date python util to collect nvidia-smi metrics
 - [ ] read these [eval details and techniques](https://huggingface.co/datasets/meta-llama/Llama-3.2-3B-Instruct-evals) by Meta
