@@ -1,0 +1,24 @@
+# hugging face libs
+huggingface_hub
+transformers
+datasets
+# lm tools
+langsmith
+langchain
+langchain-huggingface
+llama-index
+# evals
+ragas
+lm-eval
+# parsers
+unstructured
+langchain-unstructured
+# vectors
+chromadb
+langchain-chroma
+# basic ui
+streamlit
+# cli and env
+typer
+python-dotenv
+omegaconf
