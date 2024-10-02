@@ -7,6 +7,9 @@ Focus will be given to LM variants belonging to the Llama, Minitron, and Nemotro
 > [!NOTE]
 > small language models are models with 8B parameters or fewer
 
+> [!NOTE]
+> the default model quantization in the listed HF collection is GGUF-4_K_M
+
 ## To do
 
 - [ ] consolidate setup.py and setup.cfg to pyproject.toml
@@ -27,4 +30,3 @@ Focus will be given to LM variants belonging to the Llama, Minitron, and Nemotro
 - ChromaDB is preferred for simplicity as a local vectordb
 - Ragas is preferred for LM performance metrics
 - LangChain will be used for LMs as a judge
-- the default model quantization in the listed HF collection is GGUF 4KM
