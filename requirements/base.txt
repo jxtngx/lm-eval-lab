@@ -17,7 +17,7 @@ langchain-unstructured
 chromadb
 langchain-chroma
 # basic ui
-streamlit
+gradio
 # cli and env
 typer
 python-dotenv

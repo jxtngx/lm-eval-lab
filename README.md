@@ -1,15 +1,17 @@
 # SLM Eval Lab
 
-A high level library to evaluate small language models (SLMs) with task based approaches, retrieval techniques, LMs as a judge, and human feedback.
+A high level project to evaluate small language models (SLMs) with task based approaches, retrieval techniques, LMs as a judge, and human feedback. Using this repo should aid in the selection of SLMs based on user defined quantitative criteria and qualitative perception.
 
-This library aids in the selection of SLMs based on user defined criteria and perception.
+Focus will be given to LM variants belonging to the Llama, Minitron, and Nemotron (distillations) model families. See this Hugging Face [collection](https://huggingface.co/collections/jxtngx/slm-quants-66fd22225a60c216a7e30989) for quantized models. 
+
+> [!NOTE]
+> small language models are models with 8B parameters or fewer
 
 ## To do
 
 - [ ] consolidate setup.py and setup.cfg to pyproject.toml
 - [ ] choose lm-eval tasks
-- [ ] determine models (likely Nemotron distilled, Minitron, Phi 3 mini, Llama 3.1 and 3.2)
-- [ ] locate persona dataset (e.g. [argilla/FinePersonas-v0.1](https://huggingface.co/datasets/argilla/FinePersonas-v0.1)) and determine suitability
+- [ ] locate persona dataset (e.g. [argilla/FinePersonas-v0.1](https://huggingface.co/datasets/argilla/FinePersonas-v0.1)) and determine suitability for use
 - [ ] check installation and usage in Colab
 - [ ] check clone and usage in GPU enabled instance
 - [ ] craft prompts for LM as a judge
@@ -22,6 +24,7 @@ This library aids in the selection of SLMs based on user defined criteria and pe
 - The core focus of this library is generating output for evaluation. The modules in the library reflect the mentioned techniques.
 - LangChain is preferred for model provider integrations
 - LlamaIndex is preferred for evaluating intermediate steps in RAG pipelines
-- ChromaDB is preferred as a basic vectordb
+- ChromaDB is preferred for simplicity as a local vectordb
 - Ragas is preferred for LM performance metrics
-- Either DeepEval or LangChain will be used for LMs as a judge
+- LangChain will be used for LMs as a judge
+- the default model quantization in the listed HF collection is GGUF 4KM
