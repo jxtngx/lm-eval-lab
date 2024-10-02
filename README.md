@@ -20,3 +20,4 @@ Focus will be given to LM variants belonging to the Llama, Minitron, and Nemotro
 - ChromaDB is preferred for simplicity as a local vectordb
 - Ragas is preferred for LM performance metrics
 - LangChain will be used for LMs as a judge
+- Output will be collected to a table for human feedback to mock [this survey](https://github.com/aws-samples/human-in-the-loop-llm-eval-blog). 
