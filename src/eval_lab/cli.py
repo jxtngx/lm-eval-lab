@@ -17,7 +17,7 @@ import typer
 
 from eval_lab.utils.config import load_config
 
-cfg = load_config(os.path.join(os.getcwd(), "training-config.yaml"))
+cfg = load_config(os.path.join(os.getcwd(), ".lab-config.yaml"))
 
 app = typer.Typer()
 
