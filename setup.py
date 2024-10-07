@@ -35,7 +35,7 @@ setup(
     author="",
     license="Apache 2.0",
     author_email="",
-    url="https://github.com/jxtngx/lm-lab",
+    url="https://github.com/jxtngx/eval-lab",
     classifiers=[
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Information Analysis",
