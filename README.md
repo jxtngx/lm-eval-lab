@@ -1,7 +1,8 @@
 # Eval Lab
 
 > [!IMPORTANT]
-> this project is under active development
+> this project is under active development, and is not intended to be used as an open source service.
+> this project is simply a portfolio work
 
 ## The basics
 
@@ -30,7 +31,7 @@ Eval Lab's main class is `Evaluator`; which is similar to `Trainer` objects in d
 ```python
 from eval_lab import Evaluator, Human, Judge, Synth, Harness
 
-human = Human(arg1, arg2, ...)
+human = Human(...)
 judge = Judge(metrics=[...])
 synth = Synth(retriever="similarity", embed_model="model", reranker="model")
 harness = Harness(tasks=[...])
@@ -47,7 +48,7 @@ evaluator = Evaluator(
 evaluator.run()
 ```
 
-Running the evaluator will log results to the user defined log dir or `eval-lab/logs/evaluator`.
+Running the evaluator will log results to the user defined directory or `eval-lab/logs/evaluator`.
 
 ## Run times
 
@@ -59,15 +60,15 @@ The length of time it takes to run evaluations depends on several factors, inclu
 - the type of evals
 - the subtasks performed by the evals
 
-In other words: if we own an M-series MacBook Pro or have access to only a single NVIDIA A10G or Tesla T4, we will need to select a small language model (8B parameters or fewer) that has likely been quantized (made smaller, so to speak), and – while we can run each of (`Human`, `Judge`, `Synth`, `Harness`), we would want to limit the tasks included in `Harness` (defaults are [mmlu, hellaswag, gsm8k]) to achieve a reasonable run time.
+In other words: if we own an M-series MacBook Pro or have access to a single NVIDIA A10G or Tesla T4, we will need to select a small language model (8B parameters or fewer) that has likely been quantized (made smaller, so to speak), and – while we can run each of (`Human`, `Judge`, `Synth`, `Harness`), we would want to limit the tasks included in `Harness` (defaults are [mmlu, hellaswag, gsm8k]) to achieve a reasonable run time.
 
 ## Compute environments
 
-Assuming a single GPU, care ought to be take to load the model as efficiently as possible; which likely means that evals ought to be in a queue (a simple for loop). Though not ideal in terms of reducing run times, iterating through the evals one at a time will help to avoid out-of-memory errors we may encounter if attempting to run evals in parallel in compute limited environments.
+Assuming a single GPU, care ought to be taken to load the model as efficiently as possible; which likely means that evals ought to be in a queue (a simple for loop) in order to load the model one time only. As such – the model ought to be an attribute of `Evaluator`. Though not ideal in terms of reducing run times, iterating through the evals one at a time will help to avoid out-of-memory errors we may encounter if attempting to run evals in parallel in compute limited environments.
 
 In a multi-GPU environment, run times could be reduced by distributing simple evals (`Human`, `Judge`) to one device, and complex evals (`Synth`, `Harness`) on the remainder of the devices. Though this requires knowledge of backend APIs that have to do with device count and device placement (including CPU offloading).
 
-Such design decisions require selecting dependencies based on device awareness i.e. distributed evals or single device evals; and device architecture – Apple's MPS, NVIDIA's CUDA etc. 
+Such design decisions require selecting dependencies based on device awareness i.e. distributed evals or single device evals; and device architectures – Apple's MPS, NVIDIA's CUDA etc. 
 
 ## Notes
 
