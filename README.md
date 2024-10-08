@@ -65,7 +65,7 @@ In other words: if we own an M-series MacBook Pro or have access to only a singl
 
 Assuming a single GPU, care ought to be take to load the model as efficiently as possible; which likely means that evals ought to be in a queue (a simple for loop). Though not ideal in terms of reducing run times, iterating through the evals one at a time will help to avoid out-of-memory errors we may encounter if attempting to run evals in parallel in computer limited environments.
 
-In a multi-GPU environment, run times could be reduced by distributing simple evals (`Human`, `Judge`) to one device, and complex evals (`Synth`, `Harness`) on the remainder of the devices. Though this requires knowledge of backend APIs that have to do with device count and device placement.
+In a multi-GPU environment, run times could be reduced by distributing simple evals (`Human`, `Judge`) to one device, and complex evals (`Synth`, `Harness`) on the remainder of the devices. Though this requires knowledge of backend APIs that have to do with device count and device placement (including CPU offloading).
 
 Such design decisions require selecting dependencies based on device awareness i.e. distributed evals or single device evals; and device architecture – Apple's MPS, NVIDIA's CUDA etc. 
 
