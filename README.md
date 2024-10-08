@@ -59,7 +59,7 @@ The length of time it takes to run evaluations depends on several factors, inclu
 - the type of evals
 - the subtasks performed by the evals
 
-In other words: if we own an M-series MacBook Pro or have access to only an NVIDIA A10G, we will need to select a small language model (8B parameters or fewer) that has likely been quantized (made smaller, so to speak), and – while we can run each of (`Human`, `Judge`, `Synth`, `Harness`), we would want to limit the tasks included in `Harness` (defaults are [mmlu, hellaswag, gsm8k]) to achieve a reasonable run time.
+In other words: if we own an M-series MacBook Pro or have access to only a single NVIDIA A10G or Tesla T4, we will need to select a small language model (8B parameters or fewer) that has likely been quantized (made smaller, so to speak), and – while we can run each of (`Human`, `Judge`, `Synth`, `Harness`), we would want to limit the tasks included in `Harness` (defaults are [mmlu, hellaswag, gsm8k]) to achieve a reasonable run time.
 
 ## Compute environments
 
