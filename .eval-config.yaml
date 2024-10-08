@@ -12,9 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+model:
+  owner: jxtngx
+  name: Llama-3.2-3B-Instruct-Q4_K_M-GGUF
 
-"""run LM as a judge
+evaluations:
+  human: true
+  lm: true
+  rag: true
+  tasks: true
 
-this module ought to include a class to run LM as a judge against a model's ouput, and also a
-second class to enable evaluating a model's ability to act as a judge
-"""
+human:
+  kwarg: value
+
+judge:
+  answer_relevancy: {setting: value}
+  contextual_relevancy: {setting: value}
+  groundedness: {setting: value}
+
+rag:
+  retriever: "similarity"
+  embed_model: "model_name"
+  reranker: "model_name"
+
+tasks:
+  - mmlu
+  - hellaswag
+  - gsm8k

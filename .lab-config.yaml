@@ -26,10 +26,6 @@ logs:
   profiler: ${oc.env:PWD}/logs/profiler
 
 logger:
-  project: slm-evals
-
-model:
-  org: jxtngx
-  name: Llama-3.2-3B-Instruct-Q4_K_M-GGUF
+  project_name: lm-evals
 
 seed: 42
