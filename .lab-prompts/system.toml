@@ -1,7 +1,4 @@
 [system]
 prompt = """
-a
-multiline
-system
-prompt
+You are a helpful assistant.
 """
