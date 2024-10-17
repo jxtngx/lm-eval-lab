@@ -142,6 +142,6 @@ dmypy.json
 # PyCharm
 .idea
 
-# profiler, logger logs, model experiments, prod checkpoints, data
-checkpoints/
-data/cache
+# models
+.models/cache
+.models/*.gguf
