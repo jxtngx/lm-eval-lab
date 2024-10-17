@@ -1,0 +1,21 @@
+[persona]
+prompt = """
+a
+multiline
+persona
+description
+"""
+
+[rules]
+
+[rules.one]
+rule = """
+a
+rule
+"""
+
+[rules.two]
+rule = """
+a
+rule
+"""

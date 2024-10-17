@@ -1,0 +1,7 @@
+[system]
+prompt = """
+a
+multiline
+system
+prompt
+"""
