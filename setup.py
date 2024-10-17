@@ -19,7 +19,7 @@ from setuptools import find_packages, setup
 rootdir = Path(__file__).parent
 long_description = (rootdir / "README.md").read_text()
 
-package_name = "eval_lab"
+package_name = "lm_eval_lab"
 
 setup(
     name=package_name,
@@ -35,7 +35,7 @@ setup(
     author="",
     license="Apache 2.0",
     author_email="",
-    url="https://github.com/jxtngx/eval-lab",
+    url="https://github.com/jxtngx/lm-eval-lab",
     classifiers=[
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Information Analysis",

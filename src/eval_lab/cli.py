@@ -15,7 +15,7 @@
 import os
 import typer
 
-from eval_lab.utils.config import load_config
+from lm_eval_lab.utils.config import load_config
 
 cfg = load_config(os.path.join(os.getcwd(), ".lab-config.yaml"))
 

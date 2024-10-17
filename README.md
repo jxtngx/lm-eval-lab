@@ -29,7 +29,7 @@ Eval Lab's main class is `Evaluator`; which is similar to `Trainer` objects in d
 `Evaluator` will accept an iterable of evaluations to run, and those evaluations are determined by the areas mentioned in the basics section e.g.
 
 ```python
-from eval_lab import Evaluator, Human, Judge, Synth, Harness
+from lm_eval_lab import Evaluator, Human, Judge, Synth, Harness
 
 human = Human(...)
 judge = Judge(metrics=[...])
@@ -48,7 +48,7 @@ evaluator = Evaluator(
 evaluator.run()
 ```
 
-Running the evaluator will log results to the user defined directory or `eval-lab/logs/evaluator`.
+Running the evaluator will log results to the user defined directory or `lm-eval-lab/logs/evaluator`.
 
 ## Run times
 
