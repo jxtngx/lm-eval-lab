@@ -18,15 +18,82 @@ requires = [
     "wheel",
 ]
 
+[project]
+name = "lm_eval_lab"
+dynamic = ["version"]
+description = "Comprehensive Language Model Evaluations"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    { name = "Justin Goheen" },
+]
+requires-python = ">=3.9"
+classifiers = [
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "huggingface_hub",
+    "transformers",
+    "datasets",
+    "langsmith",
+    "langchain",
+    "langchain-huggingface",
+    "llama-index",
+    "ragas",
+    "lm-eval",
+    "unstructured",
+    "langchain-unstructured",
+    "chromadb",
+    "langchain-chroma",
+    "streamlit",
+    "typer",
+    "python-dotenv",
+    "omegaconf"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black",
+    "pytest",
+    "mypy",
+    "bandit",
+    "coverage",
+    "pre-commit",
+    "isort"
+]
+docs = [
+    "mkdocstrings[python]"
+]
+packaging = [
+    "setuptools",
+    "build",
+    "twine"
+]
+
+[project.urls]
+Repository = "https://github.com/jxtngx/lm-eval-lab"
+
+[project.scripts]
+lm-evals = "lm_eval_lab.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.black]
+line-length = 120
+
+[tool.flake8]
 line-length = 120
 
 [tool.isort]
 known_first_party = [
-    "lm-eval-lab"
-]
-known_third_party = [
-    "langchain"
+    "lm_eval_lab"
 ]
 profile = "black"
 line_length = 120
@@ -73,3 +140,19 @@ warn_no_return = "False"
 [[tool.mypy.overrides]]
 #module = []
 ignore_errors = true
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+norecursedirs = [
+    ".git",
+    ".github",
+    "*.egg-info"
+]
+aadopts = "--disable-pytest-warnings"
+
+[tool.coverage.run]
+disable_warnings = ["couldnt-parse"]
+
+[tool.coverage.report]
+ignore_errors = true
+exclude_lines = ["pragma: no cover"]
