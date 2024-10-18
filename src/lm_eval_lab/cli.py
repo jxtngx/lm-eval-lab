@@ -13,15 +13,20 @@
 # limitations under the License.
 
 import os
-import threading
 from typing import Optional
 
 import typer
 
 from lm_eval_lab.utils.load_files import load_config
 
-cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/lab-config.yaml"))
+# configs
+lab_cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/lab-config.yaml"))
+eval_cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/eval-config.yaml"))
+
+# typer app
 app = typer.Typer()
+evaluator_app = typer.Typer()
+app.add_typer(evaluator_app, name="evaluator")
 
 
 @app.callback()
@@ -31,8 +36,8 @@ def callback() -> None:
 
 @app.command("download")
 def download(
-    repo_id: str = f"{cfg.model.owner}/{cfg.model.name}",
-    filename: str = cfg.model.filename,
+    repo_id: str = f"{lab_cfg.model.owner}/{lab_cfg.model.name}",
+    filename: str = lab_cfg.model.filename,
     verbose: bool = False,
     models_dir: str = ".models",
 ) -> None:
@@ -47,52 +52,23 @@ def download(
     )
 
 
-@app.command("serve")
-def serve(
-    model: str = ".models/llama-3.2-1b-instruct-q4_k_m.gguf",
+@evaluator_app.command("run")
+def run_evaluator(
+    model: str = eval_cfg.model,
+    n_gpu_layers: int = -1,
     chat_format: Optional[str] = None,
     host: str = "localhost",
     port: int = 8000,
 ) -> None:
-    from time import sleep
-    import uvicorn
-    from llama_cpp.server.app import create_app
-    from llama_cpp.server.settings import ModelSettings, ServerSettings
+    from lm_eval_lab import Evaluator
 
-    model_settings = ModelSettings(
+    evaluator = Evaluator(
+        evals=[k for k in eval_cfg.evaluations if eval_cfg.evaluations[k]],
         model=model,
+        n_gpu_layers=n_gpu_layers,
         chat_format=chat_format,
-        use_mlock=False,  # avoids `warning: failed to munlock buffer: Cannot allocate memory`
-    )
-    server_settings = ServerSettings(
         host=host,
         port=port,
-        ssl_keyfile=None,
-        ssl_certfile=None,
     )
 
-    app = create_app(model_settings=[model_settings], server_settings=server_settings)
-
-    config = uvicorn.Config(
-        app=app,
-        host=server_settings.host,
-        port=server_settings.port,
-        ssl_keyfile=server_settings.ssl_keyfile,
-        ssl_certfile=server_settings.ssl_certfile,
-    )
-    server = uvicorn.Server(config=config)
-    # use a separte thread to avoid blocking call
-    # see https://github.com/encode/uvicorn/discussions/1103#discussioncomment-6187606
-    print("STARTING SERVER")
-    thread = threading.Thread(daemon=True, target=server.run)
-    thread.start()
-    print("WAITING")
-    sleep(15)
-    assert isinstance(thread.native_id, int), f"PID is {thread.native_id}"
-    print("SLEEPING")
-    sleep(15)
-    print("SHUTTING DOWN SERVER")
-    server.should_exit = True
-    while thread.is_alive():
-        continue
-    print("SERVER STOPPED")
+    evaluator.run()

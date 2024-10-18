@@ -13,8 +13,10 @@
 # limitations under the License.
 
 from abc import ABC, abstractmethod
-from llama_cpp.server.settings import ModelSettings, ServerSettings
+from typing import Optional
+
 from llama_cpp.server.app import create_app
+from llama_cpp.server.settings import ModelSettings, ServerSettings
 
 
 class BaseEvaluator(ABC):
@@ -24,11 +26,15 @@ class BaseEvaluator(ABC):
         self,
         evals: list,
         model: str,
-        host: str,
-        port: int,
+        n_gpu_layers: int,
+        chat_format: Optional[str] = None,
+        host: str = "localhost",
+        port: int = 8000,
     ) -> None:
         self.evals = evals
         self.model = model
+        self.n_gpu_layers = n_gpu_layers
+        self.chat_format = chat_format
         self.host = host
         self.port = port
 
@@ -48,14 +54,19 @@ class BaseEvaluator(ABC):
         ...
 
     @abstractmethod
-    def stop_server(self, pid: int) -> None:
+    def stop_server(self) -> None:
         """stop the server backend"""
         ...
 
     @property
     def model_settings(self) -> ModelSettings:
         """model settings to pass to llama-cpp app"""
-        return ModelSettings(model=self.model)
+        return ModelSettings(
+            model=self.model,
+            n_gpu_layers=self.n_gpu_layers,
+            chat_format=self.chat_format,
+            use_mlock=False,  # avoids `warning: failed to munlock buffer: Cannot allocate memory`
+        )
 
     @property
     def server_settings(self) -> ServerSettings:
@@ -76,7 +87,7 @@ class BaseEvaluator(ABC):
         return llama_cpp_app
 
     def on_evaluator_start(self) -> None:
-        """register evaluations and subtasks"""
+        """complete tasks before running evaluations"""
         ...
 
     def on_evaluator_end(self) -> None:
