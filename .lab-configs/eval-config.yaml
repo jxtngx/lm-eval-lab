@@ -16,7 +16,7 @@ model: ".models/llama-3.2-1b-instruct-q4_k_m.gguf"
 
 evaluations:
   human: true
-  lm: true
+  judge: true
   rag: true
   tasks: true
 
