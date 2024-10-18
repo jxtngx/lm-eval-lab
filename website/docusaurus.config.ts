@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'LM Eval Lab',
-  tagline: 'Comprehensive Language Model Evals',
+  tagline: 'Comprehensive Language Model Evaluations',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
