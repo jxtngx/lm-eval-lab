@@ -13,6 +13,8 @@
 # limitations under the License.
 
 import os
+from typing import Optional
+
 import typer
 
 from lm_eval_lab.utils.config import load_config
@@ -42,4 +44,37 @@ def download(
         verbose=verbose,
         local_dir=models_dir,
         cache_dir=models_dir,
+    )
+
+
+@app.command("serve")
+def serve(
+    model: str = ".models/llama-3.2-1b-instruct-q4_k_m.gguf",
+    chat_format: Optional[str] = None,
+    host: str = "localhost",
+    port: int = 8000,
+) -> None:
+    import uvicorn
+    from llama_cpp.server.app import create_app
+    from llama_cpp.server.settings import ModelSettings, ServerSettings
+
+    model_settings = ModelSettings(
+        model=model,
+        chat_format=chat_format,
+    )
+    server_settings = ServerSettings(
+        host=host,
+        port=port,
+        ssl_keyfile=None,
+        ssl_certfile=None,
+    )
+
+    app = create_app(model_settings=[model_settings], server_settings=server_settings)
+
+    uvicorn.run(
+        app,
+        host=host,
+        port=port,
+        ssl_keyfile=server_settings.ssl_keyfile,
+        ssl_certfile=server_settings.ssl_certfile,
     )
