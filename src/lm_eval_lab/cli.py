@@ -17,7 +17,7 @@ import typer
 
 from lm_eval_lab.utils.config import load_config
 
-cfg = load_config(os.path.join(os.getcwd(), ".lab-config.yaml"))
+cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/lab-config.yaml"))
 
 app = typer.Typer()
 
@@ -25,3 +25,21 @@ app = typer.Typer()
 @app.callback()
 def callback() -> None:
     pass
+
+
+@app.command("download")
+def download(
+    repo_id: str = "jxtngx/Meta-Llama-3.2-1B-Instruct-Q4_K_M-GGUF",
+    filename: str = "*q4_k_m.gguf",
+    verbose: bool = False,
+    models_dir: str = ".models",
+) -> None:
+    from llama_cpp import Llama
+
+    Llama.from_pretrained(
+        repo_id=repo_id,
+        filename=filename,
+        verbose=verbose,
+        local_dir=models_dir,
+        cache_dir=models_dir,
+    )
