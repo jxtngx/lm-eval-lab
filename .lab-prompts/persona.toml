@@ -1,5 +1,5 @@
-[persona]
-prompt = """
+[base]
+description = """
 a
 multiline
 persona
@@ -10,12 +10,19 @@ description
 
 [rules.one]
 rule = """
-a
-rule
+rule one
 """
 
 [rules.two]
 rule = """
+rule two
+"""
+
+[body]
+text = """
 a
-rule
+multiline
+body
+of
+text
 """
