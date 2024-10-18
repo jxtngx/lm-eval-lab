@@ -1,8 +1,7 @@
 # Eval Lab
 
 > [!IMPORTANT]
-> this project is under active development, and is not intended to be used as an open source service.
-> this project is simply a portfolio work
+> this project is under active development
 
 ## The basics
 
