@@ -3,8 +3,8 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'IB Interface',
-  tagline: 'An Open Source API for Interactive Brokers TWS and Gateway',
+  title: 'LM Eval Lab',
+  tagline: 'Comprehensive Language Model Evals',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -50,7 +50,7 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/social-card.jpg',
     navbar: {
-      title: 'IB Interface',
+      title: 'LM Eval Lab',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
