@@ -43,6 +43,8 @@ dependencies = [
     "langsmith",
     "langchain",
     "langchain-huggingface",
+    "weave",
+    "wandb",
     "llama-index",
     "ragas",
     "lm-eval",
