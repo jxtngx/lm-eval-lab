@@ -20,7 +20,6 @@ import typer
 from lm_eval_lab.utils.config import load_config
 
 cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/lab-config.yaml"))
-
 app = typer.Typer()
 
 
@@ -31,8 +30,8 @@ def callback() -> None:
 
 @app.command("download")
 def download(
-    repo_id: str = "jxtngx/Meta-Llama-3.2-1B-Instruct-Q4_K_M-GGUF",
-    filename: str = "*q4_k_m.gguf",
+    repo_id: str = f"{cfg.model.owner}/{cfg.model.name}",
+    filename: str = cfg.model.filename,
     verbose: bool = False,
     models_dir: str = ".models",
 ) -> None:
