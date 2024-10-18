@@ -75,6 +75,9 @@ packaging = [
     "build",
     "twine"
 ]
+all = [
+    "lm_eval_lab[dev, docs, packaging]"
+]
 
 [project.urls]
 Repository = "https://github.com/jxtngx/lm-eval-lab"
