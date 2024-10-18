@@ -13,10 +13,30 @@
 # limitations under the License.
 
 import os
+import tomllib
 from pathlib import Path
 from typing import Union
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
+
+
+def load_system_prompt(prompt_path: Union[str, Path]) -> str:
+    with open(prompt_path, "rb") as f:
+        system_prompt = tomllib.load(f)
+    return system_prompt["system"]["prompt"]
+
+
+def _join_persona(persona: dict) -> str:
+    description = persona["base"]["description"].replace("\n", " ")
+    rules = ["".join(["[RULE]", "\n", persona["rules"][k]["rule"].replace("\n", "")]) for k in persona["rules"].keys()]
+    body = persona["body"]["text"].replace("\n", " ")
+    return "\n\n".join([description, *rules, body])
+
+
+def load_persona(persona_path: Union[str, Path]) -> str:
+    with open(persona_path, "rb") as f:
+        persona = tomllib.load(f)
+    return _join_persona(persona)
 
 
 def load_config(filepath: Union[Path, str]) -> DictConfig | ListConfig:
