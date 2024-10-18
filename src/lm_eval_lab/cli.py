@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import threading
 from typing import Optional
 
 import typer
@@ -53,6 +54,7 @@ def serve(
     host: str = "localhost",
     port: int = 8000,
 ) -> None:
+    from time import sleep
     import uvicorn
     from llama_cpp.server.app import create_app
     from llama_cpp.server.settings import ModelSettings, ServerSettings
@@ -60,6 +62,7 @@ def serve(
     model_settings = ModelSettings(
         model=model,
         chat_format=chat_format,
+        use_mlock=False,  # avoids `warning: failed to munlock buffer: Cannot allocate memory`
     )
     server_settings = ServerSettings(
         host=host,
@@ -70,10 +73,26 @@ def serve(
 
     app = create_app(model_settings=[model_settings], server_settings=server_settings)
 
-    uvicorn.run(
-        app,
-        host=host,
-        port=port,
+    config = uvicorn.Config(
+        app=app,
+        host=server_settings.host,
+        port=server_settings.port,
         ssl_keyfile=server_settings.ssl_keyfile,
         ssl_certfile=server_settings.ssl_certfile,
     )
+    server = uvicorn.Server(config=config)
+    # use a separte thread to avoid blocking call
+    # see https://github.com/encode/uvicorn/discussions/1103#discussioncomment-6187606
+    print("STARTING SERVER")
+    thread = threading.Thread(daemon=True, target=server.run)
+    thread.start()
+    print("WAITING")
+    sleep(15)
+    assert isinstance(thread.native_id, int), f"PID is {thread.native_id}"
+    print("SLEEPING")
+    sleep(15)
+    print("SHUTTING DOWN SERVER")
+    server.should_exit = True
+    while thread.is_alive():
+        continue
+    print("SERVER STOPPED")
