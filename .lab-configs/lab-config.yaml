@@ -18,12 +18,10 @@
 data:
   cache_dir: ${oc.env:PWD}/data
 
-checkpoints:
-  cache_dir: ${oc.env:PWD}/checkpoints
+models:
+  cache_dir: ${oc.env:PWD}/.models
 
-logs:
-  experiments: ${oc.env:PWD}/logs/experiments
-  profiler: ${oc.env:PWD}/logs/profiler
+logs: ${oc.env:PWD}/logs
 
 logger:
   project_name: lm-evals
