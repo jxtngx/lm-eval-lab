@@ -1,0 +1,14 @@
+futures:
+  label: Futures
+  permalink: /futures
+  description: Futures trading
+
+ai:
+  label: AI
+  permalink: /ai
+  description: Applied AI
+
+ml:
+  label: ML
+  permalink: /ml
+  description: Machine Learning
