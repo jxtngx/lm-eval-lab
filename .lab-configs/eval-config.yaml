@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+model: ".models/llama-3.2-1b-instruct-q4_k_m.gguf"
+
 evaluations:
   human: true
   lm: true

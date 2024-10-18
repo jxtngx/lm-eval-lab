@@ -19,7 +19,7 @@ data:
   cache_dir: ${oc.env:PWD}/data
 
 models:
-  cache_dir: ${oc.env:PWD}/.models
+  dir: ${oc.env:PWD}/.models
 
 logs: ${oc.env:PWD}/logs
 
