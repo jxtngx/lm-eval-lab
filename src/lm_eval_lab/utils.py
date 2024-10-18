@@ -20,6 +20,10 @@ from typing import Union
 from omegaconf import DictConfig, ListConfig, OmegaConf
 
 
+def load_evals_from_config(config) -> dict:
+    return {k: config[k] for k in config.evaluations if config.evaluations[k]}
+
+
 def load_system_prompt(prompt_path: Union[str, Path]) -> str:
     with open(prompt_path, "rb") as f:
         system_prompt = tomllib.load(f)

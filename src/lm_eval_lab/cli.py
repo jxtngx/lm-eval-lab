@@ -17,7 +17,7 @@ from typing import Optional
 
 import typer
 
-from lm_eval_lab.utils.load_files import load_config
+from lm_eval_lab.utils import load_config
 
 # configs
 lab_cfg = load_config(os.path.join(os.getcwd(), ".lab-configs/lab-config.yaml"))
@@ -72,3 +72,13 @@ def run_evaluator(
     )
 
     evaluator.run()
+
+
+@app.command("load-cfg")
+def load_eval_config():
+    from pprint import pprint
+
+    from lm_eval_lab.utils import load_evals_from_config
+
+    evals = load_evals_from_config(eval_cfg)
+    pprint(evals)
