@@ -1,11 +1,11 @@
-# Eval Lab
+# LM Eval Lab
 
 > [!IMPORTANT]
 > this project is under active development
 
 ## The basics
 
-Eval Lab is a high level project to evaluate language models (LMs) with task based approaches, as a synthesizer in RAG, in LM as a judge scenarios (as judge and judged), and collecting output for human feedback.
+LM Eval Lab is a high level project to evaluate language models (LMs) with task based approaches, as a synthesizer in RAG, in LM as a judge scenarios (as judge and judged), and collecting output for human feedback.
 
 ### Intent
 
@@ -23,7 +23,7 @@ Focus will be given to open LM variants belonging to Meta, NVIDIA, and Nous Rese
 
 ## Concept
 
-Eval Lab's main class is `Evaluator`; which is similar to `Trainer` objects in deep learning in that these objects control other core interfaces and supporting interfaces. 
+LM Eval Lab's main class is `Evaluator`; which is similar to `Trainer` objects in deep learning in that these objects control other core interfaces and supporting interfaces. 
 
 `Evaluator` will accept an iterable of evaluations to run, and those evaluations are determined by the areas mentioned in the basics section e.g.
 
