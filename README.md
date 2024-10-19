@@ -63,7 +63,7 @@ In other words: if we own an M-series MacBook Pro or have access to a single NVI
 
 ## Compute environments
 
-Assuming a single GPU, care ought to be taken to load the model as efficiently as possible; which likely means that evals ought to be in a queue (a simple for loop) in order to load the model one time only. As such – the model ought to be an attribute of `Evaluator`. Though not ideal in terms of reducing run times, iterating through the evals one at a time will help to avoid out-of-memory errors we may encounter if attempting to run evals in parallel in compute limited environments.
+Assuming a single GPU, care ought to be taken to load the model as efficiently as possible; which likely means that evals ought to be in a queue (a simple for loop) in order to load the model one time only. Though not ideal in terms of reducing run times, iterating through the evals one at a time will help to avoid out-of-memory errors we may encounter if attempting to run evals in parallel in compute limited environments.
 
 In a multi-GPU environment, run times could be reduced by distributing simple evals (`Human`, `Judge`) to one device, and complex evals (`Synth`, `Harness`) on the remainder of the devices. Though this requires knowledge of backend APIs that have to do with device count and device placement (including CPU offloading).
 
